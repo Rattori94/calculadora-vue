@@ -1,97 +1,151 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 
-const num1 = ref(0)
-const num2 = ref(0)
+const num1 = ref(null)
+const num2 = ref(null)
+
 const operacao = ref('+')
 
-const resultado = computed(() => {
+const resultado = ref(null)
+
+function calcular() {
   const a = Number(num1.value)
   const b = Number(num2.value)
 
   switch (operacao.value) {
     case '+':
-      return a + b
+      resultado.value = a + b
+      break
+
     case '-':
-      return a - b
+      resultado.value = a - b
+      break
+
     case '*':
-      return a * b
+      resultado.value = a * b
+      break
+
     case '/':
-      return b !== 0 ? a / b : 'Erro: divisão por zero'
-    default:
-      return 0
+      resultado.value =
+        b !== 0
+          ? (a / b).toFixed(2)
+          : 'Não é possível dividir por zero.'
+      break
   }
-})
+}
 </script>
 
 <template>
-  <div class="container">
-    <h1 class="title">Calculadora Aritmética</h1>
+  <main class="container">
 
-    <div class="card">
-      <input
-        v-model="num1"
-        type="number"
-        placeholder="Número 1"
-      />
+    <section class="card">
 
-      <select v-model="operacao">
-        <option value="+">Soma (+)</option>
-        <option value="-">Subtração (-)</option>
-        <option value="*">Multiplicação (*)</option>
-        <option value="/">Divisão (/)</option>
-      </select>
+      <div class="title">
 
-      <input
-        v-model="num2"
-        type="number"
-        placeholder="Número 2"
-      />
+        <i class="fa-solid fa-calculator"></i>
 
-      <h2 class="result">
-        Resultado: {{ resultado }}
-      </h2>
-    </div>
-  </div>
+        <h1>Calculadora Vue</h1>
+
+      </div>
+
+      <p class="subtitle">
+        Escolha uma operação, informe os números e clique em calcular.
+      </p>
+
+      <div class="campo">
+
+        <label>
+          Primeiro número
+        </label>
+
+        <input
+          v-model.number="num1"
+          type="number"
+          placeholder="Digite um número"
+        >
+
+      </div>
+
+      <div class="operacoes">
+
+        <button
+          class="op-btn"
+          :class="{ ativo: operacao === '+' }"
+          @click="operacao = '+'"
+        >
+          <i class="fa-solid fa-plus"></i>
+        </button>
+
+        <button
+          class="op-btn"
+          :class="{ ativo: operacao === '-' }"
+          @click="operacao = '-'"
+        >
+          <i class="fa-solid fa-minus"></i>
+        </button>
+
+        <button
+          class="op-btn"
+          :class="{ ativo: operacao === '*' }"
+          @click="operacao = '*'"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <button
+          class="op-btn"
+          :class="{ ativo: operacao === '/' }"
+          @click="operacao = '/'"
+        >
+          <i class="fa-solid fa-divide"></i>
+        </button>
+
+      </div>
+
+      <div class="campo">
+
+        <label>
+          Segundo número
+        </label>
+
+        <input
+          v-model.number="num2"
+          type="number"
+          placeholder="Digite outro número"
+        >
+
+      </div>
+
+      <button
+        class="calcular"
+        @click="calcular"
+      >
+        <i class="fa-solid fa-equals"></i>
+
+        Calcular
+      </button>
+
+      <Transition name="fade">
+
+        <div
+          v-if="resultado !== null"
+          class="resultado"
+        >
+
+          <small>Resultado</small>
+
+          <h2>{{ resultado }}</h2>
+
+        </div>
+
+      </Transition>
+
+    </section>
+
+  </main>
 </template>
 
 <style scoped>
-.container {
-  max-width: 420px;
-  margin: 60px auto;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  text-align: center;
-}
-
-.title {
-  line-height: 1.4;
-  font-size: 28px;
-  margin-bottom: 10px;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-input,
-select {
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
-.result {
-  margin-top: 10px;
-  font-size: 20px;
-  font-weight: bold;
-}
+@import "./style.css";
 </style>
+```
