@@ -1,38 +1,33 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
-const num1 = ref(null)
-const num2 = ref(null)
-
+const num1 = ref(0)
+const num2 = ref(0)
 const operacao = ref('+')
 
-const resultado = ref(null)
-
-function calcular() {
+const resultado = computed(() => {
   const a = Number(num1.value)
   const b = Number(num2.value)
 
   switch (operacao.value) {
     case '+':
-      resultado.value = a + b
-      break
+      return a + b
 
     case '-':
-      resultado.value = a - b
-      break
+      return a - b
 
     case '*':
-      resultado.value = a * b
-      break
+      return a * b
 
     case '/':
-      resultado.value =
-        b !== 0
-          ? (a / b).toFixed(2)
-          : 'Não é possível dividir por zero.'
-      break
+      return b !== 0
+        ? (a / b).toFixed(2)
+        : 'Não é possível dividir por zero.'
+
+    default:
+      return 0
   }
-}
+})
 </script>
 
 <template>
@@ -41,34 +36,29 @@ function calcular() {
     <section class="card">
 
       <div class="title">
-
         <i class="fa-solid fa-calculator"></i>
-
         <h1>Calculadora Vue</h1>
-
       </div>
 
       <p class="subtitle">
-        Escolha uma operação, informe os números e clique em calcular.
+        Escolha uma operação e informe os números. O resultado será atualizado automaticamente.
       </p>
 
       <div class="campo">
-
-        <label>
-          Primeiro número
-        </label>
+        <label for="num1">Primeiro número</label>
 
         <input
+          id="num1"
           v-model.number="num1"
           type="number"
-          placeholder="Digite um número"
+          placeholder="Digite o primeiro número"
         >
-
       </div>
 
       <div class="operacoes">
 
         <button
+          type="button"
           class="op-btn"
           :class="{ ativo: operacao === '+' }"
           @click="operacao = '+'"
@@ -77,6 +67,7 @@ function calcular() {
         </button>
 
         <button
+          type="button"
           class="op-btn"
           :class="{ ativo: operacao === '-' }"
           @click="operacao = '-'"
@@ -85,6 +76,7 @@ function calcular() {
         </button>
 
         <button
+          type="button"
           class="op-btn"
           :class="{ ativo: operacao === '*' }"
           @click="operacao = '*'"
@@ -93,6 +85,7 @@ function calcular() {
         </button>
 
         <button
+          type="button"
           class="op-btn"
           :class="{ ativo: operacao === '/' }"
           @click="operacao = '/'"
@@ -103,42 +96,24 @@ function calcular() {
       </div>
 
       <div class="campo">
-
-        <label>
-          Segundo número
-        </label>
+        <label for="num2">Segundo número</label>
 
         <input
+          id="num2"
           v-model.number="num2"
           type="number"
-          placeholder="Digite outro número"
+          placeholder="Digite o segundo número"
         >
-
       </div>
 
-      <button
-        class="calcular"
-        @click="calcular"
-      >
-        <i class="fa-solid fa-equals"></i>
+      <div class="resultado">
+        <small>
+          <i class="fa-solid fa-equals"></i>
+          Resultado
+        </small>
 
-        Calcular
-      </button>
-
-      <Transition name="fade">
-
-        <div
-          v-if="resultado !== null"
-          class="resultado"
-        >
-
-          <small>Resultado</small>
-
-          <h2>{{ resultado }}</h2>
-
-        </div>
-
-      </Transition>
+        <h2>{{ resultado }}</h2>
+      </div>
 
     </section>
 
@@ -148,4 +123,3 @@ function calcular() {
 <style scoped>
 @import "./style.css";
 </style>
-```
