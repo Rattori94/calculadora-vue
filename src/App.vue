@@ -32,78 +32,38 @@ const resultado = computed(() => {
 
 <template>
   <main class="container">
-
     <section class="card">
 
       <div class="title">
         <i class="fa-solid fa-calculator"></i>
-        <h1>Calculadora Vue</h1>
+        <h1>Calculadora Aritmética</h1>
       </div>
 
       <p class="subtitle">
-        Escolha uma operação e informe os números. O resultado será atualizado automaticamente.
+        Escolha uma operação e informe os valores. O resultado será atualizado automaticamente.
       </p>
 
       <div class="campo">
-        <label for="num1">Primeiro número</label>
+        <label for="numero1">Primeiro número</label>
 
-        <input
-          id="num1"
-          v-model.number="num1"
-          type="number"
-          placeholder="Digite o primeiro número"
-        >
-      </div>
-
-      <div class="operacoes">
-
-        <button
-          type="button"
-          class="op-btn"
-          :class="{ ativo: operacao === '+' }"
-          @click="operacao = '+'"
-        >
-          <i class="fa-solid fa-plus"></i>
-        </button>
-
-        <button
-          type="button"
-          class="op-btn"
-          :class="{ ativo: operacao === '-' }"
-          @click="operacao = '-'"
-        >
-          <i class="fa-solid fa-minus"></i>
-        </button>
-
-        <button
-          type="button"
-          class="op-btn"
-          :class="{ ativo: operacao === '*' }"
-          @click="operacao = '*'"
-        >
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-
-        <button
-          type="button"
-          class="op-btn"
-          :class="{ ativo: operacao === '/' }"
-          @click="operacao = '/'"
-        >
-          <i class="fa-solid fa-divide"></i>
-        </button>
-
+        <input id="numero1" v-model.number="num1" type="number" placeholder="Digite o primeiro número">
       </div>
 
       <div class="campo">
-        <label for="num2">Segundo número</label>
+        <label for="operacao">Operação</label>
 
-        <input
-          id="num2"
-          v-model.number="num2"
-          type="number"
-          placeholder="Digite o segundo número"
-        >
+        <select id="operacao" v-model="operacao">
+          <option value="+">Soma (+)</option>
+          <option value="-">Subtração (-)</option>
+          <option value="*">Multiplicação (*)</option>
+          <option value="/">Divisão (÷)</option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label for="numero2">Segundo número</label>
+
+        <input id="numero2" v-model.number="num2" type="number" placeholder="Digite o segundo número">
       </div>
 
       <div class="resultado">
@@ -116,7 +76,6 @@ const resultado = computed(() => {
       </div>
 
     </section>
-
   </main>
 </template>
 

@@ -14,7 +14,7 @@ body {
     font-family: Inter, Arial, Helvetica, sans-serif;
     background: linear-gradient(135deg, #0f172a, #1e3a8a, #2563eb);
     background-attachment: fixed;
-    color: #fff;
+    color: #ffffff;
 }
 
 .container {
@@ -31,7 +31,7 @@ body {
 
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 20px;
 
     padding: 35px;
 
@@ -65,8 +65,8 @@ body {
 
 .subtitle {
     text-align: center;
-    color: #dbeafe;
     line-height: 1.6;
+    color: #dbeafe;
 }
 
 .campo {
@@ -80,7 +80,8 @@ label {
     color: #f8fafc;
 }
 
-input {
+input,
+select {
     width: 100%;
 
     padding: 14px 16px;
@@ -91,7 +92,7 @@ input {
 
     background: rgba(255, 255, 255, 0.08);
 
-    color: white;
+    color: #ffffff;
 
     font-size: 16px;
 
@@ -99,10 +100,11 @@ input {
 }
 
 input::placeholder {
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(255, 255, 255, 0.6);
 }
 
-input:focus {
+input:focus,
+select:focus {
     outline: none;
 
     border-color: #60a5fa;
@@ -112,47 +114,35 @@ input:focus {
     transform: scale(1.02);
 }
 
+select {
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    background-image:
+        linear-gradient(45deg, transparent 50%, white 50%),
+        linear-gradient(135deg, white 50%, transparent 50%);
+
+    background-position:
+        calc(100% - 18px) calc(50% - 3px),
+        calc(100% - 12px) calc(50% - 3px);
+
+    background-size: 6px 6px;
+    background-repeat: no-repeat;
+
+    padding-right: 42px;
+}
+
+option {
+    background: #1e293b;
+    color: #ffffff;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-}
-
-
-.operacoes {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-}
-
-.op-btn {
-    height: 60px;
-
-    border: none;
-
-    border-radius: 14px;
-
-    background: rgba(255, 255, 255, 0.08);
-
-    color: white;
-
-    font-size: 22px;
-
-    cursor: pointer;
-
-    transition: 0.25s;
-}
-
-.op-btn:hover {
-    background: rgba(59, 130, 246, 0.9);
-
-    transform: translateY(-3px);
-}
-
-.op-btn.ativo {
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-
-    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.45);
 }
 
 .resultado {
@@ -162,11 +152,11 @@ input::-webkit-inner-spin-button {
 
     border-radius: 18px;
 
-    text-align: center;
-
     background: rgba(255, 255, 255, 0.08);
 
     border: 1px solid rgba(255, 255, 255, 0.1);
+
+    text-align: center;
 }
 
 .resultado small {
@@ -177,19 +167,19 @@ input::-webkit-inner-spin-button {
 
     color: #bfdbfe;
 
-    font-size: 14px;
-
     text-transform: uppercase;
 
     letter-spacing: 1px;
+
+    font-size: 13px;
 }
 
 .resultado h2 {
-    margin-top: 10px;
+    margin-top: 12px;
 
     font-size: 2.3rem;
 
-    font-weight: bold;
+    font-weight: 700;
 
     color: #ffffff;
 
@@ -198,7 +188,7 @@ input::-webkit-inner-spin-button {
 
 @media (max-width: 480px) {
     .card {
-        padding: 25px;
+        padding: 24px;
     }
 
     .title h1 {
@@ -209,12 +199,12 @@ input::-webkit-inner-spin-button {
         font-size: 30px;
     }
 
-    .op-btn {
-        height: 54px;
-        font-size: 20px;
+    .resultado h2 {
+        font-size: 1.9rem;
     }
 
-    .resultado h2 {
-        font-size: 1.8rem;
+    input,
+    select {
+        font-size: 15px;
     }
 }
